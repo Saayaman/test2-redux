@@ -1,24 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
+import SimpleTable from './SimpleTable';
+import Header from './Header';
 import './App.css';
+import Modal from './Modal';
 
 function App() {
+  // [1,2] 1 = statename, 2 = setState
+  // userState(3) 3 means default value
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    console.log('clicked!');
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <SimpleTable openModal={handleClickOpen} />
+      <Modal handleClose={handleClose} open={open} />
     </div>
   );
 }

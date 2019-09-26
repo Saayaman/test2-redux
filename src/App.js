@@ -3,7 +3,7 @@ import SimpleTable from './SimpleTable';
 import Header from './Header';
 import Modal from './Modal';
 import './App.css';
-
+import { rows } from './formDataContents'; 
 
 function App() {
   // [1,2] 1 = statename, 2 = setState
@@ -17,26 +17,7 @@ function App() {
   const [formDataId, setFormDataId] = React.useState(null);
 
   console.log('formDataId', formDataId);
-
-
-  const line1 = {
-    id: 123456789,
-    title: 'Random title1',
-    state: 'open',
-    url: 'https://api.github.com/repos/angular/angular/',
-    createdAt: '2019-09-24T10:01:21Z',
-    updatedAt: '2019-09-24T10:01:21Z'
-  }
-
-  const line2 = {
-    id: 223456789,
-    title: 'Random title2',
-    state: 'open',
-    url: 'https://api.github.com/repos/angular/angular/',
-    createdAt: '2019-09-24T10:01:21Z',
-    updatedAt: '2019-09-24T10:01:21Z'
-  }
-
+  //object
   const emptyDefault = {
     id: '',
     title: '',
@@ -44,6 +25,15 @@ function App() {
     url: '',
     createdAt: '',
     updatedAt: '',
+  }
+
+  //function
+  const getDataFromId = () => {
+    // find the index of the object containing the right id
+    const index = rows.findIndex((row) => formDataId === row.id)
+
+    console.log('index', index); 
+    return rows[index];
   }
 
   return (
@@ -60,7 +50,7 @@ function App() {
         <Modal handleClose={() => setOpen(false)}
           // open={open}
           // isAddButton={isAddButton}
-          formData={isAddButton ? emptyDefault : line1}
+          formData={isAddButton ? emptyDefault : getDataFromId()}
         />
       )}
 

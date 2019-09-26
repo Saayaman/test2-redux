@@ -25,3 +25,11 @@
   display: flex;
   justify-content: space-between;
 }
+
+.MuiDialogActions-root {
+  justify-content: unset !important;
+}
+/* 
+.Modal-DialogActions {
+  justify-content: none;
+} */

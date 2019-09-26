@@ -9,44 +9,91 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function FormDialog(props) {
 
-  //no longer used
-  const [open, setOpen] = React.useState(false);
+  // const formData = props.formData;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [titleValue, setTitleValue] = React.useState(props.formData.title);
+  const [stateValue, setStateValue] = React.useState('');
+  const [urlValue, setUrlValue] = React.useState('');
+  const [createdValue, setCreatedValue] = React.useState('');
+  const [updatedValue, setUpdatedValue] = React.useState('');
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+
+  const save = () => {
+    // 1. validation
+
+    console.log({
+      title: titleValue,
+      state: stateValue,
+      url: urlValue,
+      createdAt: createdValue,
+      updatedAt: updatedValue
+    });
+    // 2. save data to redux
+
+  }
 
   return (
     <div>
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Open form dialog
-      </Button>
-      <Dialog open={props.open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
+      <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+        <DialogTitle id="form-dialog-title">Add new issue</DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here. We will send updates
-            occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+          <form>
+            <TextField
+              autoFocus
+              required={true}
+              id="standard-required"
+              label="Title"
+              className=""
+              margin="normal"
+              fullWidth={true}
+              value={titleValue}
+              onChange={(e) => setTitleValue(e.target.value)}
+            />
+             <TextField
+              required={true}
+              id="standard-required"
+              label="State"
+              className=""
+              margin="normal"
+              fullWidth={true}
+              value={stateValue}
+              onChange={(e) => setStateValue(e.target.value)}
+            />
+            <TextField
+              id="standard-name"
+              label="Url"
+              className=""
+              value={urlValue}
+              onChange={(e) => setUrlValue(e.target.value)}
+              margin="normal"
+              fullWidth
+            />
+            <TextField
+              id="standard-name"
+              label="Created At"
+              className=""
+              value={createdValue}
+              onChange={(e) => setCreatedValue(e.target.value)}
+              margin="normal"
+              fullWidth
+            />
+            <TextField
+              id="standard-name"
+              label="Updated At"
+              className=""
+              value={updatedValue}
+              onChange={(e) => setUpdatedValue(e.target.value)}
+              margin="normal"
+              fullWidth
+            />
+          </form>
         </DialogContent>
-        <DialogActions>
+        <DialogActions className="Modal-DialogActions">
+          <Button color="primary" onClick={save}>
+            Save
+          </Button>
           <Button onClick={props.handleClose} color="primary">
             Cancel
-          </Button>
-          <Button onClick={handleClose} color="primary">
-            Subscribe
           </Button>
         </DialogActions>
       </Dialog>

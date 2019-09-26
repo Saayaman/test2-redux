@@ -48,7 +48,10 @@ export default function SimpleTable(props) {
             <TableCell align="right">Created at</TableCell>
             <TableCell align="right">Updated at</TableCell>
             <TableCell align="right">
-              <AddIcon color="primary" onClick={props.openModal} />
+              <AddIcon color="primary" onClick={() => {
+                props.openModal();
+                props.setIsAddButton(true);
+              }} />
             </TableCell>
           </TableRow>
         </TableHead>
@@ -64,7 +67,11 @@ export default function SimpleTable(props) {
               <TableCell align="right">{row.createdAt}</TableCell>
               <TableCell align="right">{row.updatedAt}</TableCell>
               <TableCell align="right">
-                <CreateIcon color="secondary" /><DeleteIcon color="secondary" />
+                {/* This is edit button */}
+                <CreateIcon color="secondary" onClick={() => {
+                  props.setIsAddButton(false);
+                  props.openModal();
+                }} /><DeleteIcon color="secondary" />
               </TableCell>
             </TableRow>
           ))}

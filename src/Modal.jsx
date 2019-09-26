@@ -9,14 +9,14 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 
 export default function FormDialog(props) {
 
-  // const formData = props.formData;
+  const { id, title, state, url, createdAt, updatedAt } = props.formData;
 
-  const [titleValue, setTitleValue] = React.useState(props.formData.title);
-  const [stateValue, setStateValue] = React.useState('');
-  const [urlValue, setUrlValue] = React.useState('');
-  const [createdValue, setCreatedValue] = React.useState('');
-  const [updatedValue, setUpdatedValue] = React.useState('');
-
+  //*useState only sets default once
+  const [titleValue, setTitleValue] = React.useState(title);
+  const [stateValue, setStateValue] = React.useState(state);
+  const [urlValue, setUrlValue] = React.useState(url);
+  const [createdValue, setCreatedValue] = React.useState(createdAt);
+  const [updatedValue, setUpdatedValue] = React.useState(updatedAt);
 
   const save = () => {
     // 1. validation
@@ -29,12 +29,11 @@ export default function FormDialog(props) {
       updatedAt: updatedValue
     });
     // 2. save data to redux
-
   }
 
   return (
     <div>
-      <Dialog open={props.open} onClose={props.handleClose} aria-labelledby="form-dialog-title">
+      <Dialog open={true} onClose={props.handleClose} aria-labelledby="form-dialog-title">
         <DialogTitle id="form-dialog-title">Add new issue</DialogTitle>
         <DialogContent>
           <form>

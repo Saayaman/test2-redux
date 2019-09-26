@@ -71,6 +71,7 @@ export default function SimpleTable(props) {
                 <CreateIcon color="secondary" onClick={() => {
                   props.setIsAddButton(false);
                   props.openModal();
+                  props.setFormDataId(row.id);
                 }} /><DeleteIcon color="secondary" />
               </TableCell>
             </TableRow>

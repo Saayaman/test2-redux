@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default function SimpleTable(props) {
+function SimpleTable(props) {
   const classes = useStyles();
 
   return (
@@ -71,3 +71,5 @@ export default function SimpleTable(props) {
     </Paper>
   );
 }
+
+export default SimpleTable

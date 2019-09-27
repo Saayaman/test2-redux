@@ -5,7 +5,13 @@ import Modal from './Modal';
 import './App.css';
 import { rows } from './formDataContents'; 
 
-function App() {
+// Redux Step 1 > import 2 things
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+
+function App(props) {
+  console.log('formData', props.formData);
+
   // [1,2] 1 = statename, 2 = setState
   // userState(3) 3 means default value
 
@@ -58,4 +64,24 @@ function App() {
   );
 }
 
-export default App;
+
+//gets stuff from the store and returns in the component as props
+function mapStateToProps(store) {
+  console.log('store', store);
+
+  //returning as props object
+  return {
+    formDataRows: store.formDataReducer.rows
+  }
+}
+
+function mapDispatchToProps() {
+
+}
+
+export default connect(
+  //1. getting states
+  mapStateToProps,
+  //2. getting actions
+  mapDispatchToProps
+)(App);

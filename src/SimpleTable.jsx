@@ -9,7 +9,6 @@ import Paper from '@material-ui/core/Paper';
 import AddIcon from '@material-ui/icons/Add';
 import CreateIcon from '@material-ui/icons/Create';
 import DeleteIcon from '@material-ui/icons/Delete';
-import { rows } from './formDataContents';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,8 +22,10 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function SimpleTable(props) {
+function SimpleTable ({ openModal, setIsAddButton, setFormDataId, rows }){
   const classes = useStyles();
+
+  console.log('rows', rows);
 
   return (
     <Paper className={classes.root}>
@@ -39,8 +40,8 @@ function SimpleTable(props) {
             <TableCell align="right">Updated at</TableCell>
             <TableCell align="right">
               <AddIcon color="primary" onClick={() => {
-                props.openModal();
-                props.setIsAddButton(true);
+                openModal();
+                setIsAddButton(true);
               }} />
             </TableCell>
           </TableRow>
@@ -59,9 +60,9 @@ function SimpleTable(props) {
               <TableCell align="right">
                 {/* This is edit button */}
                 <CreateIcon color="secondary" onClick={() => {
-                  props.setIsAddButton(false);
-                  props.openModal();
-                  props.setFormDataId(row.id);
+                  setIsAddButton(false);
+                  openModal();
+                  setFormDataId(row.id);
                 }} /><DeleteIcon color="secondary" />
               </TableCell>
             </TableRow>

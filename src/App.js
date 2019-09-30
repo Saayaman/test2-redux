@@ -9,8 +9,11 @@ import { rows } from './formDataContents';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+//Redux Step: import actions
+import { getFormData } from './actions/formData';
+
+
 function App(props) {
-  console.log('formData', props.formData);
 
   // [1,2] 1 = statename, 2 = setState
   // userState(3) 3 means default value
@@ -21,6 +24,12 @@ function App(props) {
 
   // data type: number
   const [formDataId, setFormDataId] = React.useState(null);
+
+  //fires function right away when component loads
+  props.getFormData();
+
+  //Does not fire right away. Needs to be called from UI
+  // const getFormData = () => props.getFormData();
 
   console.log('formDataId', formDataId);
   //object
@@ -42,6 +51,8 @@ function App(props) {
     return rows[index];
   }
 
+  console.log('formDataRows', props.formDataRows);
+
   return (
     <div className="App">
       <Header />
@@ -49,6 +60,7 @@ function App(props) {
         openModal={() => setOpen(true)}
         setIsAddButton={setIsAddButton}
         setFormDataId={setFormDataId}
+        rows={props.formDataRows}
       />
 
       {/* when we click edit or plus button, Modal component renders */}
@@ -75,8 +87,12 @@ function mapStateToProps(store) {
   }
 }
 
-function mapDispatchToProps() {
+//gets action from redux and returns in the component as props
+function mapDispatchToProps(dispatch) {
 
+  return bindActionCreators({
+    getFormData,
+  }, dispatch)
 }
 
 export default connect(

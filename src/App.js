@@ -10,7 +10,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 //Redux Step: import actions
-import { getFormData } from './actions/formData';
+import { getFormData, editFormData } from './actions/formData';
 
 
 function App(props) {
@@ -26,7 +26,13 @@ function App(props) {
   const [formDataId, setFormDataId] = React.useState(null);
 
   //fires function right away when component loads
-  props.getFormData();
+
+  // Similar to componentDidMount and componentDidUpdate:
+  React.useEffect(() => {
+    if(props.formDataRows.length === 0) {
+      props.getFormData();
+    }
+  });
 
   //Does not fire right away. Needs to be called from UI
   // const getFormData = () => props.getFormData();
@@ -46,12 +52,13 @@ function App(props) {
   const getDataFromId = () => {
     // find the index of the object containing the right id
     const index = rows.findIndex((row) => formDataId === row.id)
-
-    console.log('index', index); 
     return rows[index];
   }
 
-  console.log('formDataRows', props.formDataRows);
+
+  const editData = (formData) => {
+    props.editFormData(formData)
+  }
 
   return (
     <div className="App">
@@ -67,7 +74,8 @@ function App(props) {
       {open && (
         <Modal handleClose={() => setOpen(false)}
           // open={open}
-          // isAddButton={isAddButton}
+          editData={editData}
+          isAddButton={isAddButton}
           formData={isAddButton ? emptyDefault : getDataFromId()}
         />
       )}
@@ -92,6 +100,7 @@ function mapDispatchToProps(dispatch) {
 
   return bindActionCreators({
     getFormData,
+    editFormData,
   }, dispatch)
 }
 

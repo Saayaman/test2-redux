@@ -33,6 +33,16 @@ export default function formData(state = initialState, action) {
       // console.log('add_result', result);
       return state;
     // case 'EDIT_FORM_DATA':
+    case 'EDIT_FORM_DATA':
+      let newRows = state.rows;
+      let index = state.rows.findIndex((row) => row.id === action.payload.id)
+      newRows[index] = action.payload;
+      return {
+        ...state,
+        rows: [
+          ...newRows,
+        ]
+      }
     // case 'DELETE_FORM_DATA':
     default:
       return state;

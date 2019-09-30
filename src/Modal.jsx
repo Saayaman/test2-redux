@@ -21,14 +21,20 @@ export default function FormDialog(props) {
   const save = () => {
     // 1. validation
 
-    console.log({
-      title: titleValue,
-      state: stateValue,
-      url: urlValue,
-      createdAt: createdValue,
-      updatedAt: updatedValue
-    });
     // 2. save data to redux
+
+    if (props.isAddButton) {
+      console.log('addbutton')
+    } else {
+      props.editData({
+        id: id,
+        title: titleValue,
+        state: stateValue,
+        url: urlValue,
+        createdAt: createdValue,
+        updatedAt: updatedValue
+      });
+    }
   }
 
   return (

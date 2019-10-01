@@ -46,6 +46,9 @@ export default function FormDialog(props) {
       createdAt: createdValue,
       updatedAt: updatedValue
     });
+
+    props.handleClose();
+
   }
 
   return (

@@ -26,12 +26,15 @@ function App(props) {
   const [formDataId, setFormDataId] = React.useState(null);
 
   //fires function right away when component loads
-  props.getFormData();
+  React.useEffect(() => {
+    if(props.formDataRows.length === 0) {
+      props.getFormData();
+    } 
+  })
 
   //Does not fire right away. Needs to be called from UI
   // const getFormData = () => props.getFormData();
 
-  console.log('formDataId', formDataId);
   //object
   const emptyDefault = {
     id: '',

@@ -31,7 +31,9 @@ export function getFormData() {
   }
 }
 
+// payload ====> data to send to the reducer
 export function addFormData(payload) {
+  console.log('payload', payload);
   return function(dispatch) {
     dispatch({
       type: 'ADD_FORM_DATA',

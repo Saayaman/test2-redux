@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import uuid from 'uuid/v1';
 
 export default function FormDialog(props) {
 
@@ -18,6 +19,14 @@ export default function FormDialog(props) {
   const [createdValue, setCreatedValue] = React.useState(createdAt);
   const [updatedValue, setUpdatedValue] = React.useState(updatedAt);
 
+  // const uniqueKey = () => {
+  //   if(id === null) {
+  //     return uuid();
+  //   } else {
+  //     return id;
+  //   }
+  // }
+
   const save = () => {
     // 1. validation
 
@@ -29,6 +38,14 @@ export default function FormDialog(props) {
       updatedAt: updatedValue
     });
     // 2. save data to redux
+    props.addFormData({
+      id: id ? id : uuid(),
+      title: titleValue,
+      state: stateValue,
+      url: urlValue,
+      createdAt: createdValue,
+      updatedAt: updatedValue
+    });
   }
 
   return (

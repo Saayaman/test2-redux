@@ -1,3 +1,5 @@
+import { addFormData } from "../actions/formData";
+
 // constant file
 
 function createData(id, title, state, url, createdAt, updatedAt) {
@@ -16,13 +18,13 @@ const initialState = {
 
 // state => most updated data
 
+// if threre is nothing in the state, use intialState
 export default function formData(state = initialState, action) {
   //action.type > condition
   switch(action.type) {
     case 'GET_FORM_DATA':
       //1. update state
       //2. return the updated state
-      console.log('action', action);
       return {
         ...state,
         rows: action.payload
@@ -31,7 +33,18 @@ export default function formData(state = initialState, action) {
       //all params sent are called payload
       // const result = state.rows.push(action.payload);
       // console.log('add_result', result);
-      return state;
+      // initialState.push(action.payload)
+
+      //the latest updated state
+      let copiedRows = state.rows;
+      copiedRows.push(action.payload)
+
+      // console.log('reducers formdata', initialState.rows.push(action.payload));
+
+      return {
+        ...state,
+        rows: copiedRows,
+      };
     // case 'EDIT_FORM_DATA':
     // case 'DELETE_FORM_DATA':
     default:

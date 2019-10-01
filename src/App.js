@@ -10,8 +10,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 //Redux Step: import actions
-import { getFormData } from './actions/formData';
-
+import { getFormData, addFormData } from './actions/formData';
 
 function App(props) {
 
@@ -37,7 +36,7 @@ function App(props) {
 
   //object
   const emptyDefault = {
-    id: '',
+    id: '', //means null
     title: '',
     state: '',
     url: '',
@@ -71,6 +70,7 @@ function App(props) {
         <Modal handleClose={() => setOpen(false)}
           // open={open}
           // isAddButton={isAddButton}
+          addFormData={props.addFormData}
           formData={isAddButton ? emptyDefault : getDataFromId()}
         />
       )}
@@ -92,9 +92,9 @@ function mapStateToProps(store) {
 
 //gets action from redux and returns in the component as props
 function mapDispatchToProps(dispatch) {
-
   return bindActionCreators({
     getFormData,
+    addFormData,
   }, dispatch)
 }
 
@@ -102,5 +102,5 @@ export default connect(
   //1. getting states
   mapStateToProps,
   //2. getting actions
-  mapDispatchToProps
+  mapDispatchToProps,
 )(App);

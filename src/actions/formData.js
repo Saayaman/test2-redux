@@ -11,7 +11,6 @@ export function getFormData() {
   console.log('action fired!');
 
   //usually has API calls to get data from database
-
   //but for now, send back fake data
   
   // NOT a default export
@@ -37,6 +36,24 @@ export function addFormData(payload) {
   return function(dispatch) {
     dispatch({
       type: 'ADD_FORM_DATA',
+      payload: payload
+    })
+  }
+}
+
+export function deleteFormData(payload) {
+  return function(dispatch) {
+    dispatch({
+      type: 'DELETE_FORM_DATA',
+      payload: payload
+    })
+  }
+}
+
+export function editFormData(payload) {
+  return function(dispatch) {
+    dispatch({
+      type: 'EDIT_FORM_DATA',
       payload: payload
     })
   }

@@ -38,17 +38,28 @@ export default function FormDialog(props) {
       updatedAt: updatedValue
     });
     // 2. save data to redux
-    props.addFormData({
-      id: id ? id : uuid(),
-      title: titleValue,
-      state: stateValue,
-      url: urlValue,
-      createdAt: createdValue,
-      updatedAt: updatedValue
-    });
-
+    if (props.isAddButton) {
+      props.addFormData({
+        id: uuid(),
+        title: titleValue,
+        state: stateValue,
+        url: urlValue,
+        createdAt: createdValue,
+        updatedAt: updatedValue
+      });
+    } else {
+      //edit
+      props.editFormData({
+        id: id,
+        title: titleValue,
+        state: stateValue,
+        url: urlValue,
+        createdAt: createdValue,
+        updatedAt: updatedValue
+      });
+    }
+    
     props.handleClose();
-
   }
 
   return (

@@ -30,23 +30,41 @@ export default function formData(state = initialState, action) {
         rows: action.payload
       }
     case 'ADD_FORM_DATA':
-      //all params sent are called payload
-      // const result = state.rows.push(action.payload);
-      // console.log('add_result', result);
-      // initialState.push(action.payload)
-
       //the latest updated state
       let copiedRows = state.rows;
       copiedRows.push(action.payload)
-
-      // console.log('reducers formdata', initialState.rows.push(action.payload));
 
       return {
         ...state,
         rows: copiedRows,
       };
-    // case 'EDIT_FORM_DATA':
-    // case 'DELETE_FORM_DATA':
+    case 'DELETE_FORM_DATA':
+      let reducedRows = state.rows;
+      return {
+        ...state,
+        rows: reducedRows.filter(row => row.id !== action.payload),
+      }
+    case 'EDIT_FORM_DATA':
+      let editedRows = state.rows;
+      console.log('edited object', action.payload);
+
+      // Answer1: using map
+      const newRows = editedRows.map((row) => {
+        if(row.id === action.payload.id) {
+          return action.payload
+        }
+        return row;
+      })
+
+      //Answer2: using index and replacing it
+      // const index = editedRows.findIndex((row) => row.id === action.payload.id)
+
+      // editedRows[index] = action.payload;
+
+      return {
+        ...state,
+        rows: newRows //or editedRows
+      }
     default:
       return state;
   }

@@ -22,11 +22,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function SimpleTable ({ openModal, setIsAddButton, setFormDataId, rows }){
+function SimpleTable ({
+  openModal,
+  setIsAddButton,
+  setFormDataId,
+  rows,
+  deleteFormData
+}){
   const classes = useStyles();
-
-  console.log('rows', rows);
-
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -63,7 +66,11 @@ function SimpleTable ({ openModal, setIsAddButton, setFormDataId, rows }){
                   setIsAddButton(false);
                   openModal();
                   setFormDataId(row.id);
-                }} /><DeleteIcon color="secondary" />
+                }} />
+                <DeleteIcon
+                  color="secondary"
+                  onClick={() => deleteFormData(row.id)}
+                />
               </TableCell>
             </TableRow>
           ))}

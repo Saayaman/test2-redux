@@ -10,7 +10,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 //Redux Step: import actions
-import { getFormData, addFormData } from './actions/formData';
+import {
+  getFormData,
+  addFormData,
+  deleteFormData,
+  editFormData
+} from './actions/formData';
 
 function App(props) {
 
@@ -63,13 +68,15 @@ function App(props) {
         setIsAddButton={setIsAddButton}
         setFormDataId={setFormDataId}
         rows={props.formDataRows}
+        deleteFormData={props.deleteFormData}
       />
 
       {/* when we click edit or plus button, Modal component renders */}
       {open && (
         <Modal handleClose={() => setOpen(false)}
           // open={open}
-          // isAddButton={isAddButton}
+          editFormData={props.editFormData}
+          isAddButton={isAddButton}
           addFormData={props.addFormData}
           formData={isAddButton ? emptyDefault : getDataFromId()}
         />
@@ -82,8 +89,6 @@ function App(props) {
 
 //gets stuff from the store and returns in the component as props
 function mapStateToProps(store) {
-  console.log('store', store);
-
   //returning as props object
   return {
     formDataRows: store.formDataReducer.rows
@@ -95,6 +100,8 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     getFormData,
     addFormData,
+    deleteFormData,
+    editFormData,
   }, dispatch)
 }
 
